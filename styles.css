@@ -1,0 +1,10 @@
+body:after{
+  content: "state population visualization";
+  font-family:"Andale Mono", Consolas;
+  font-size:16pt;
+  display:block;
+  color: blue;
+  position:fixed;
+  bottom: 0;
+  margin: 10px 0;
+}
