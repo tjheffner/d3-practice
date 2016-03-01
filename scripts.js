@@ -1,5 +1,5 @@
 var data; // a global
-var margin = {top: 20, right: 30, bottom: 30, left: 60}
+var margin = {top: 20, right: 30, bottom: 30, left: 60},
     width = 1000 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
@@ -20,7 +20,7 @@ var yAxis = d3.svg.axis()
 var chart = d3.select(".chart")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .append("g")
+  .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.json("https://gist.githubusercontent.com/tjheffner/0922f6c058cae934c226/raw/471e20f51cd839634bfc5b0f304b363e070cd93e/age-data.json", function(error, json) {
@@ -37,33 +37,38 @@ d3.json("https://gist.githubusercontent.com/tjheffner/0922f6c058cae934c226/raw/4
 
   chart.append("g")
     .attr("class", "yAxis")
-    .call(yAxis);
+    .call(yAxis)
+  .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end")
+    .text("Population");
 
-  // var barWidth = width / data.length;
-  //
-  // var bar = chart.selectAll("g")
-  //     .data(data)
-  //   .enter().append("g")
-  //     .attr("transform", function(d, i) {
-  //       return "translate(" + i * barWidth + ",0)";
-  //     });
+  chart.selectAll(".bar")
+    .data(data)
+  .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return x(d.ABBREV); })
+    .attr("y", function(d) { return y(d.POPESTIMATE2015); })
+    .attr("height", function(d) { return height - y(d.POPESTIMATE2015); })
+    .attr("width", x.rangeBand());
 
-  // bar.append("rect")
-  //   .attr("y", function(d) { return y(d.POPESTIMATE2015); })
-  //   .attr("height", function(d) { return height - y(d.POPESTIMATE2015); })
-  //   .attr("width", barWidth - 1)
-  //   .attr("class", "allPop");
-  //
-  // bar.append("rect")
-  //   .attr("y", function(d) { return y(d.POPEST18PLUS2015); })
-  //   .attr("height", function(d) { return height - y(d.POPEST18PLUS2015); })
-  //   .attr("width", barWidth - 1)
-  //   .attr("class", "ofAge");
-  //
-  // bar.append("text")
-  //   .attr("x", x.rangeBand() / 2)
-  //   .attr("dy", ".75em")
-  //   .attr("class", "vertical-text")
-  //   .text(function(d) { return d.NAME; });
+  chart.selectAll(".old")
+    .data(data)
+  .enter().append("rect")
+    .attr("class", "old")
+    .attr("x", function(d) { return x(d.ABBREV); })
+    .attr("y", function(d) { return y(d.POPEST18PLUS2015); })
+    .attr("height", function(d) { return height - y(d.POPEST18PLUS2015); })
+    .attr("width", x.rangeBand());
+
+  chart.selectAll("old")
+    .data(data)
+  .enter().append("text")
+    .attr("class", "pct")
+    .attr("x", function(d) { return x(d.ABBREV); })
+    .attr("y", function(d) { return y(d.POPEST18PLUS2015) + 8; })
+    .text(function(d) { return d.PCNT_POPEST18PLUS; });
 
 });

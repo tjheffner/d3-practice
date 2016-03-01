@@ -1,5 +1,5 @@
 body:after{
-  content: "state population visualization";
+  content: "light green = >18";
   font-family:"Andale Mono", Consolas;
   font-size:16pt;
   display:block;
@@ -10,21 +10,34 @@ body:after{
   margin: 10px 0;
 }
 
-rect.allPop {
+.xAxis path,
+.xAxis line {
+  display: none;
+}
+
+.yAxis path,
+.yAxis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
   fill: steelblue;
 }
 
-rect.ofAge {
-  fill: green;
+.old {
+  fill: lightgreen;
 }
 
-.chart text {
+text {
   fill: black;
   font: 10px sans-serif;
   text-anchor: middle;
 }
 
-.vertical-text {
-  transform: rotate(270deg);
-	transform-origin: left top 0;
+text.pct {
+  fill: orange;
+  font: 8px sans-serif;
+  text-anchor: start;
 }
