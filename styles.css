@@ -6,5 +6,20 @@ body:after{
   color: blue;
   position:fixed;
   bottom: 0;
+  right: 0;
   margin: 10px 0;
+}
+
+rect {
+  fill: steelblue;
+}
+
+rect .18plus {
+  fill: red;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: middle;
 }
