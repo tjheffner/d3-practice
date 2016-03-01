@@ -10,16 +10,21 @@ body:after{
   margin: 10px 0;
 }
 
-rect {
+rect.allPop {
   fill: steelblue;
 }
 
-rect .18plus {
-  fill: red;
+rect.ofAge {
+  fill: green;
 }
 
 .chart text {
-  fill: white;
+  fill: black;
   font: 10px sans-serif;
   text-anchor: middle;
+}
+
+.vertical-text {
+  transform: rotate(270deg);
+	transform-origin: left top 0;
 }
